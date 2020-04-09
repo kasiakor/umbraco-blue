@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "6eaadb27d511f4bd")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.9")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "adc6817c8c6f0dc0")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.10")]
 
 
 // FILE: models.generated.cs
@@ -87,11 +87,11 @@ namespace Umbraco.Web.PublishedModels
 		public IHtmlString MainContent => BasicContentControls.GetMainContent(this);
 
 		///<summary>
-		/// Title: Enter a title
+		/// Page Title: Enter a title
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("title")]
-		public string Title => BasicContentControls.GetTitle(this);
+		[ImplementPropertyType("pageTitle")]
+		public string PageTitle => BasicContentControls.GetPageTitle(this);
 	}
 
 	// Mixin Content Type with alias "basicContentControls"
@@ -102,9 +102,9 @@ namespace Umbraco.Web.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		IHtmlString MainContent { get; }
 
-		/// <summary>Title</summary>
+		/// <summary>Page Title</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		string Title { get; }
+		string PageTitle { get; }
 	}
 
 	/// <summary>Basic Content Controls</summary>
@@ -144,15 +144,15 @@ namespace Umbraco.Web.PublishedModels
 		public static IHtmlString GetMainContent(IBasicContentControls that) => that.Value<IHtmlString>("mainContent");
 
 		///<summary>
-		/// Title: Enter a title
+		/// Page Title: Enter a title
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("title")]
-		public string Title => GetTitle(this);
+		[ImplementPropertyType("pageTitle")]
+		public string PageTitle => GetPageTitle(this);
 
-		/// <summary>Static getter for Title</summary>
+		/// <summary>Static getter for Page Title</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static string GetTitle(IBasicContentControls that) => that.Value<string>("title");
+		public static string GetPageTitle(IBasicContentControls that) => that.Value<string>("pageTitle");
 	}
 
 	/// <summary>Folder</summary>
