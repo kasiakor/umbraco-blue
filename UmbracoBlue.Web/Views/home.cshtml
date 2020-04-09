@@ -1,9 +1,18 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Web.PublishedModels.Home>
 
 @{
-	Layout = "master.cshtml";
+Layout = "master.cshtml";
 }
 
-@Model.Title
+@*using ModelsBulder*@
+<div style="color:@Model.ColourName">
+    @Model.Title
+    @Model.MainContent
+    <p>My favourite color is @Model.ColourName</p>
+</div>
 
-
+@if(Model.ShowImage)
+{
+<img style="width:100%;" src="/media/svtnef1v/magic-cat-sailing-by-white-sand-beach.jpg" alt="catamaran" />
+}
+@*without ModelsBuilder - @Model.Value("colourName")*@
