@@ -8,8 +8,8 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "adc6817c8c6f0dc0")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "3795d7bf4c32dc53")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.38")]
 
 
 // FILE: models.generated.cs
@@ -42,7 +42,7 @@ namespace Umbraco.Web.PublishedModels
 {
 	/// <summary>Home</summary>
 	[PublishedModel("home")]
-	public partial class Home : PublishedContentModel, IBasicContentControls
+	public partial class Home : PublishedContentModel, IContentControls, IFooter, IHeaderControls, IMainImageControls, ISEocontrols
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -80,79 +80,1034 @@ namespace Umbraco.Web.PublishedModels
 		public bool ShowImage => this.Value<bool>("showImage");
 
 		///<summary>
-		/// Main Content: Enter the main content for this page
+		/// Main Content: Enter main content for the page
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("mainContent")]
-		public IHtmlString MainContent => BasicContentControls.GetMainContent(this);
+		public Newtonsoft.Json.Linq.JToken MainContent => ContentControls.GetMainContent(this);
 
 		///<summary>
-		/// Page Title: Enter a title
+		/// Social Links: Enter social links for the footer
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("pageTitle")]
-		public string PageTitle => BasicContentControls.GetPageTitle(this);
+		[ImplementPropertyType("socialLinks")]
+		public IEnumerable<IconLinkItem> SocialLinks => Footer.GetSocialLinks(this);
+
+		///<summary>
+		/// Subtitle: Enter subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("subtitle")]
+		public string Subtitle => HeaderControls.GetSubtitle(this);
+
+		///<summary>
+		/// Title: Enter the title, if blank page name will be used
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("title")]
+		public string Title => HeaderControls.GetTitle(this);
+
+		///<summary>
+		/// Main Image: Enter main image for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage => MainImageControls.GetMainImage(this);
+
+		///<summary>
+		/// Meta Description: Enter meta description for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => SEocontrols.GetMetaDescription(this);
+
+		///<summary>
+		/// Meta Keywords: Enter meta keywords for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords => SEocontrols.GetMetaKeywords(this);
+
+		///<summary>
+		/// Meta Name: Enter meta name for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaName")]
+		public string MetaName => SEocontrols.GetMetaName(this);
 	}
 
-	// Mixin Content Type with alias "basicContentControls"
-	/// <summary>Basic Content Controls</summary>
-	public partial interface IBasicContentControls : IPublishedContent
-	{
-		/// <summary>Main Content</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		IHtmlString MainContent { get; }
-
-		/// <summary>Page Title</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		string PageTitle { get; }
-	}
-
-	/// <summary>Basic Content Controls</summary>
-	[PublishedModel("basicContentControls")]
-	public partial class BasicContentControls : PublishedContentModel, IBasicContentControls
+	/// <summary>Article</summary>
+	[PublishedModel("article")]
+	public partial class Article : PublishedContentModel, IArticleControls, IContentControls, IHeaderControls, IMainImageControls, ISEocontrols, IVisibilityControls
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public new const string ModelTypeAlias = "basicContentControls";
+		public new const string ModelTypeAlias = "article";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		public new static IPublishedContentType GetModelContentType()
 			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BasicContentControls, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Article, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 #pragma warning restore 0109
 
 		// ctor
-		public BasicContentControls(IPublishedContent content)
+		public Article(IPublishedContent content)
 			: base(content)
 		{ }
 
 		// properties
 
 		///<summary>
-		/// Main Content: Enter the main content for this page
+		/// Article Date: Enter article date
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("articleDate")]
+		public DateTime ArticleDate => ArticleControls.GetArticleDate(this);
+
+		///<summary>
+		/// Article Name: Enter the author for the article
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("articleName")]
+		public string ArticleName => ArticleControls.GetArticleName(this);
+
+		///<summary>
+		/// Main Content: Enter main content for the page
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
 		[ImplementPropertyType("mainContent")]
-		public IHtmlString MainContent => GetMainContent(this);
+		public Newtonsoft.Json.Linq.JToken MainContent => ContentControls.GetMainContent(this);
+
+		///<summary>
+		/// Subtitle: Enter subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("subtitle")]
+		public string Subtitle => HeaderControls.GetSubtitle(this);
+
+		///<summary>
+		/// Title: Enter the title, if blank page name will be used
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("title")]
+		public string Title => HeaderControls.GetTitle(this);
+
+		///<summary>
+		/// Main Image: Enter main image for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage => MainImageControls.GetMainImage(this);
+
+		///<summary>
+		/// Meta Description: Enter meta description for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => SEocontrols.GetMetaDescription(this);
+
+		///<summary>
+		/// Meta Keywords: Enter meta keywords for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords => SEocontrols.GetMetaKeywords(this);
+
+		///<summary>
+		/// Meta Name: Enter meta name for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaName")]
+		public string MetaName => SEocontrols.GetMetaName(this);
+
+		///<summary>
+		/// Hide from XMLSitemap: Tick the box if you want to hide this page from XML Sitemap
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("hideFromXMLSitemap")]
+		public bool HideFromXmlsitemap => VisibilityControls.GetHideFromXmlsitemap(this);
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide this page from the nav and search results
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => VisibilityControls.GetUmbracoNaviHide(this);
+	}
+
+	/// <summary>Article List</summary>
+	[PublishedModel("articleList")]
+	public partial class ArticleList : PublishedContentModel, IContentControls, IHeaderControls, IMainImageControls, ISEocontrols, IVisibilityControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "articleList";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ArticleList, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ArticleList(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Main Content: Enter main content for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainContent")]
+		public Newtonsoft.Json.Linq.JToken MainContent => ContentControls.GetMainContent(this);
+
+		///<summary>
+		/// Subtitle: Enter subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("subtitle")]
+		public string Subtitle => HeaderControls.GetSubtitle(this);
+
+		///<summary>
+		/// Title: Enter the title, if blank page name will be used
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("title")]
+		public string Title => HeaderControls.GetTitle(this);
+
+		///<summary>
+		/// Main Image: Enter main image for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage => MainImageControls.GetMainImage(this);
+
+		///<summary>
+		/// Meta Description: Enter meta description for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => SEocontrols.GetMetaDescription(this);
+
+		///<summary>
+		/// Meta Keywords: Enter meta keywords for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords => SEocontrols.GetMetaKeywords(this);
+
+		///<summary>
+		/// Meta Name: Enter meta name for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaName")]
+		public string MetaName => SEocontrols.GetMetaName(this);
+
+		///<summary>
+		/// Hide from XMLSitemap: Tick the box if you want to hide this page from XML Sitemap
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("hideFromXMLSitemap")]
+		public bool HideFromXmlsitemap => VisibilityControls.GetHideFromXmlsitemap(this);
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide this page from the nav and search results
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => VisibilityControls.GetUmbracoNaviHide(this);
+	}
+
+	/// <summary>Contact</summary>
+	[PublishedModel("contact")]
+	public partial class Contact : PublishedContentModel, IContactFormControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "contact";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Contact, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Contact(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Error Message: Enter error message
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("errorMessage")]
+		public IHtmlString ErrorMessage => ContactFormControls.GetErrorMessage(this);
+
+		///<summary>
+		/// Success Message: Enter success message
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("successMessage")]
+		public IHtmlString SuccessMessage => ContactFormControls.GetSuccessMessage(this);
+	}
+
+	/// <summary>About</summary>
+	[PublishedModel("about")]
+	public partial class About : PublishedContentModel, IContentControls, IHeaderControls, IMainImageControls, ISEocontrols, IVisibilityControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "about";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<About, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public About(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Main Content: Enter main content for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainContent")]
+		public Newtonsoft.Json.Linq.JToken MainContent => ContentControls.GetMainContent(this);
+
+		///<summary>
+		/// Subtitle: Enter subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("subtitle")]
+		public string Subtitle => HeaderControls.GetSubtitle(this);
+
+		///<summary>
+		/// Title: Enter the title, if blank page name will be used
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("title")]
+		public string Title => HeaderControls.GetTitle(this);
+
+		///<summary>
+		/// Main Image: Enter main image for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage => MainImageControls.GetMainImage(this);
+
+		///<summary>
+		/// Meta Description: Enter meta description for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => SEocontrols.GetMetaDescription(this);
+
+		///<summary>
+		/// Meta Keywords: Enter meta keywords for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords => SEocontrols.GetMetaKeywords(this);
+
+		///<summary>
+		/// Meta Name: Enter meta name for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaName")]
+		public string MetaName => SEocontrols.GetMetaName(this);
+
+		///<summary>
+		/// Hide from XMLSitemap: Tick the box if you want to hide this page from XML Sitemap
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("hideFromXMLSitemap")]
+		public bool HideFromXmlsitemap => VisibilityControls.GetHideFromXmlsitemap(this);
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide this page from the nav and search results
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => VisibilityControls.GetUmbracoNaviHide(this);
+	}
+
+	/// <summary>Error</summary>
+	[PublishedModel("error")]
+	public partial class Error : PublishedContentModel, IContentControls, IHeaderControls, IMainImageControls, ISEocontrols, IVisibilityControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "error";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Error, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Error(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Main Content: Enter main content for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainContent")]
+		public Newtonsoft.Json.Linq.JToken MainContent => ContentControls.GetMainContent(this);
+
+		///<summary>
+		/// Subtitle: Enter subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("subtitle")]
+		public string Subtitle => HeaderControls.GetSubtitle(this);
+
+		///<summary>
+		/// Title: Enter the title, if blank page name will be used
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("title")]
+		public string Title => HeaderControls.GetTitle(this);
+
+		///<summary>
+		/// Main Image: Enter main image for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage => MainImageControls.GetMainImage(this);
+
+		///<summary>
+		/// Meta Description: Enter meta description for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => SEocontrols.GetMetaDescription(this);
+
+		///<summary>
+		/// Meta Keywords: Enter meta keywords for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords => SEocontrols.GetMetaKeywords(this);
+
+		///<summary>
+		/// Meta Name: Enter meta name for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaName")]
+		public string MetaName => SEocontrols.GetMetaName(this);
+
+		///<summary>
+		/// Hide from XMLSitemap: Tick the box if you want to hide this page from XML Sitemap
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("hideFromXMLSitemap")]
+		public bool HideFromXmlsitemap => VisibilityControls.GetHideFromXmlsitemap(this);
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide this page from the nav and search results
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => VisibilityControls.GetUmbracoNaviHide(this);
+	}
+
+	/// <summary>Search</summary>
+	[PublishedModel("search")]
+	public partial class Search : PublishedContentModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "search";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Search, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Search(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+	}
+
+	/// <summary>XML Sitemap</summary>
+	[PublishedModel("xMLSitemap")]
+	public partial class XMlsitemap : PublishedContentModel, IVisibilityControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "xMLSitemap";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<XMlsitemap, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public XMlsitemap(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Hide from XMLSitemap: Tick the box if you want to hide this page from XML Sitemap
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("hideFromXMLSitemap")]
+		public bool HideFromXmlsitemap => VisibilityControls.GetHideFromXmlsitemap(this);
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide this page from the nav and search results
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => VisibilityControls.GetUmbracoNaviHide(this);
+	}
+
+	// Mixin Content Type with alias "visibilityControls"
+	/// <summary>Visibility Controls</summary>
+	public partial interface IVisibilityControls : IPublishedContent
+	{
+		/// <summary>Hide from XMLSitemap</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		bool HideFromXmlsitemap { get; }
+
+		/// <summary>Umbraco Navi Hide</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		bool UmbracoNaviHide { get; }
+	}
+
+	/// <summary>Visibility Controls</summary>
+	[PublishedModel("visibilityControls")]
+	public partial class VisibilityControls : PublishedContentModel, IVisibilityControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "visibilityControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<VisibilityControls, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public VisibilityControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Hide from XMLSitemap: Tick the box if you want to hide this page from XML Sitemap
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("hideFromXMLSitemap")]
+		public bool HideFromXmlsitemap => GetHideFromXmlsitemap(this);
+
+		/// <summary>Static getter for Hide from XMLSitemap</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static bool GetHideFromXmlsitemap(IVisibilityControls that) => that.Value<bool>("hideFromXMLSitemap");
+
+		///<summary>
+		/// Umbraco Navi Hide: Tick this box if you want to hide this page from the nav and search results
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("umbracoNaviHide")]
+		public bool UmbracoNaviHide => GetUmbracoNaviHide(this);
+
+		/// <summary>Static getter for Umbraco Navi Hide</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static bool GetUmbracoNaviHide(IVisibilityControls that) => that.Value<bool>("umbracoNaviHide");
+	}
+
+	// Mixin Content Type with alias "contentControls"
+	/// <summary>Content Controls</summary>
+	public partial interface IContentControls : IPublishedContent
+	{
+		/// <summary>Main Content</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		Newtonsoft.Json.Linq.JToken MainContent { get; }
+	}
+
+	/// <summary>Content Controls</summary>
+	[PublishedModel("contentControls")]
+	public partial class ContentControls : PublishedContentModel, IContentControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "contentControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ContentControls, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ContentControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Main Content: Enter main content for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainContent")]
+		public Newtonsoft.Json.Linq.JToken MainContent => GetMainContent(this);
 
 		/// <summary>Static getter for Main Content</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static IHtmlString GetMainContent(IBasicContentControls that) => that.Value<IHtmlString>("mainContent");
+		public static Newtonsoft.Json.Linq.JToken GetMainContent(IContentControls that) => that.Value<Newtonsoft.Json.Linq.JToken>("mainContent");
+	}
+
+	// Mixin Content Type with alias "articleControls"
+	/// <summary>Article Controls</summary>
+	public partial interface IArticleControls : IPublishedContent
+	{
+		/// <summary>Article Date</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		DateTime ArticleDate { get; }
+
+		/// <summary>Article Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string ArticleName { get; }
+	}
+
+	/// <summary>Article Controls</summary>
+	[PublishedModel("articleControls")]
+	public partial class ArticleControls : PublishedContentModel, IArticleControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "articleControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ArticleControls, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ArticleControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
 
 		///<summary>
-		/// Page Title: Enter a title
+		/// Article Date: Enter article date
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		[ImplementPropertyType("pageTitle")]
-		public string PageTitle => GetPageTitle(this);
+		[ImplementPropertyType("articleDate")]
+		public DateTime ArticleDate => GetArticleDate(this);
 
-		/// <summary>Static getter for Page Title</summary>
+		/// <summary>Static getter for Article Date</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
-		public static string GetPageTitle(IBasicContentControls that) => that.Value<string>("pageTitle");
+		public static DateTime GetArticleDate(IArticleControls that) => that.Value<DateTime>("articleDate");
+
+		///<summary>
+		/// Article Name: Enter the author for the article
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("articleName")]
+		public string ArticleName => GetArticleName(this);
+
+		/// <summary>Static getter for Article Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetArticleName(IArticleControls that) => that.Value<string>("articleName");
+	}
+
+	// Mixin Content Type with alias "headerControls"
+	/// <summary>Header Controls</summary>
+	public partial interface IHeaderControls : IPublishedContent
+	{
+		/// <summary>Subtitle</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string Subtitle { get; }
+
+		/// <summary>Title</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string Title { get; }
+	}
+
+	/// <summary>Header Controls</summary>
+	[PublishedModel("headerControls")]
+	public partial class HeaderControls : PublishedContentModel, IHeaderControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "headerControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<HeaderControls, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public HeaderControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Subtitle: Enter subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("subtitle")]
+		public string Subtitle => GetSubtitle(this);
+
+		/// <summary>Static getter for Subtitle</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetSubtitle(IHeaderControls that) => that.Value<string>("subtitle");
+
+		///<summary>
+		/// Title: Enter the title, if blank page name will be used
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("title")]
+		public string Title => GetTitle(this);
+
+		/// <summary>Static getter for Title</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetTitle(IHeaderControls that) => that.Value<string>("title");
+	}
+
+	// Mixin Content Type with alias "mainImageControls"
+	/// <summary>Main Image Controls</summary>
+	public partial interface IMainImageControls : IPublishedContent
+	{
+		/// <summary>Main Image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IPublishedContent MainImage { get; }
+	}
+
+	/// <summary>Main Image Controls</summary>
+	[PublishedModel("mainImageControls")]
+	public partial class MainImageControls : PublishedContentModel, IMainImageControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "mainImageControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<MainImageControls, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public MainImageControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Main Image: Enter main image for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("mainImage")]
+		public IPublishedContent MainImage => GetMainImage(this);
+
+		/// <summary>Static getter for Main Image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedContent GetMainImage(IMainImageControls that) => that.Value<IPublishedContent>("mainImage");
+	}
+
+	// Mixin Content Type with alias "sEOControls"
+	/// <summary>SEO Controls</summary>
+	public partial interface ISEocontrols : IPublishedContent
+	{
+		/// <summary>Meta Description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string MetaDescription { get; }
+
+		/// <summary>Meta Keywords</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IEnumerable<string> MetaKeywords { get; }
+
+		/// <summary>Meta Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		string MetaName { get; }
+	}
+
+	/// <summary>SEO Controls</summary>
+	[PublishedModel("sEOControls")]
+	public partial class SEocontrols : PublishedContentModel, ISEocontrols
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "sEOControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<SEocontrols, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public SEocontrols(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Meta Description: Enter meta description for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaDescription")]
+		public string MetaDescription => GetMetaDescription(this);
+
+		/// <summary>Static getter for Meta Description</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetMetaDescription(ISEocontrols that) => that.Value<string>("metaDescription");
+
+		///<summary>
+		/// Meta Keywords: Enter meta keywords for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaKeywords")]
+		public IEnumerable<string> MetaKeywords => GetMetaKeywords(this);
+
+		/// <summary>Static getter for Meta Keywords</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IEnumerable<string> GetMetaKeywords(ISEocontrols that) => that.Value<IEnumerable<string>>("metaKeywords");
+
+		///<summary>
+		/// Meta Name: Enter meta name for the page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("metaName")]
+		public string MetaName => GetMetaName(this);
+
+		/// <summary>Static getter for Meta Name</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static string GetMetaName(ISEocontrols that) => that.Value<string>("metaName");
+	}
+
+	// Mixin Content Type with alias "contactFormControls"
+	/// <summary>Contact Form Controls</summary>
+	public partial interface IContactFormControls : IPublishedContent
+	{
+		/// <summary>Error Message</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IHtmlString ErrorMessage { get; }
+
+		/// <summary>Success Message</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IHtmlString SuccessMessage { get; }
+	}
+
+	/// <summary>Contact Form Controls</summary>
+	[PublishedModel("contactFormControls")]
+	public partial class ContactFormControls : PublishedContentModel, IContactFormControls
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "contactFormControls";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<ContactFormControls, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public ContactFormControls(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Error Message: Enter error message
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("errorMessage")]
+		public IHtmlString ErrorMessage => GetErrorMessage(this);
+
+		/// <summary>Static getter for Error Message</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IHtmlString GetErrorMessage(IContactFormControls that) => that.Value<IHtmlString>("errorMessage");
+
+		///<summary>
+		/// Success Message: Enter success message
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("successMessage")]
+		public IHtmlString SuccessMessage => GetSuccessMessage(this);
+
+		/// <summary>Static getter for Success Message</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IHtmlString GetSuccessMessage(IContactFormControls that) => that.Value<IHtmlString>("successMessage");
+	}
+
+	// Mixin Content Type with alias "footer"
+	/// <summary>Footer</summary>
+	public partial interface IFooter : IPublishedContent
+	{
+		/// <summary>Social Links</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		IEnumerable<IconLinkItem> SocialLinks { get; }
+	}
+
+	/// <summary>Footer</summary>
+	[PublishedModel("footer")]
+	public partial class Footer : PublishedContentModel, IFooter
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "footer";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Footer, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public Footer(IPublishedContent content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Social Links: Enter social links for the footer
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("socialLinks")]
+		public IEnumerable<IconLinkItem> SocialLinks => GetSocialLinks(this);
+
+		/// <summary>Static getter for Social Links</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IEnumerable<IconLinkItem> GetSocialLinks(IFooter that) => that.Value<IEnumerable<IconLinkItem>>("socialLinks");
+	}
+
+	/// <summary>Icon Link Item</summary>
+	[PublishedModel("iconLinkItem")]
+	public partial class IconLinkItem : PublishedElementModel
+	{
+		// helpers
+#pragma warning disable 0109 // new is redundant
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const string ModelTypeAlias = "iconLinkItem";
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public new static IPublishedContentType GetModelContentType()
+			=> PublishedModelUtility.GetModelContentType(ModelItemType, ModelTypeAlias);
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<IconLinkItem, TValue>> selector)
+			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+#pragma warning restore 0109
+
+		// ctor
+		public IconLinkItem(IPublishedElement content)
+			: base(content)
+		{ }
+
+		// properties
+
+		///<summary>
+		/// Icon Class: Enter icon class
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("iconClass")]
+		public string IconClass => this.Value<string>("iconClass");
+
+		///<summary>
+		/// Link: Enter the link for this item
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.1.0")]
+		[ImplementPropertyType("link")]
+		public Umbraco.Web.Models.Link Link => this.Value<Umbraco.Web.Models.Link>("link");
 	}
 
 	/// <summary>Folder</summary>
