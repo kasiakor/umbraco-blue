@@ -2377,6 +2377,10 @@
     <Content Include="Umbraco\Views\Preview\Index.cshtml" />
     <Content Include="Umbraco\Views\web.config" />
     <Content Include="Views\search.cshtml" />
+    <Content Include="Views\articleList.cshtml" />
+    <Content Include="Views\article.cshtml" />
+    <Content Include="Views\about.cshtml" />
+    <Content Include="Views\contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
