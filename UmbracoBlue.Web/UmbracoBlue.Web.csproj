@@ -425,6 +425,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\mystyle.css" />
     <Content Include="css\clean-blog.css" />
     <Content Include="css\clean-blog.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2383,6 +2384,7 @@
     <Content Include="Views\contact.cshtml" />
     <Content Include="Views\Partials\Grid\Blue.cshtml" />
     <Content Include="Views\error.cshtml" />
+    <Content Include="Views\xMLSitemap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
