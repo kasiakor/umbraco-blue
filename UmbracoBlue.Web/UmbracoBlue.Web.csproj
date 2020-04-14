@@ -2381,6 +2381,8 @@
     <Content Include="Views\article.cshtml" />
     <Content Include="Views\about.cshtml" />
     <Content Include="Views\contact.cshtml" />
+    <Content Include="Views\Partials\Grid\Blue.cshtml" />
+    <Content Include="Views\error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
