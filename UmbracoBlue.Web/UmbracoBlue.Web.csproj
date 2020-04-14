@@ -2398,6 +2398,12 @@
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UmbracoBlue.Core\UmbracoBlue.Core.csproj">
+      <Project>{932a5c42-0700-44ec-a5ef-a91156584e1f}</Project>
+      <Name>UmbracoBlue.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

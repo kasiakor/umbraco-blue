@@ -1,4 +1,5 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Web.PublishedModels.About>
+@using UmbracoBlue.Core.Extensions
 
 @{
  Layout = "master.cshtml";
@@ -11,9 +12,9 @@
   <article>
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          @Html.GetGridHtml(Model, "mainContent", "Blue")
-        </div>
+          <div class="col-lg-8 col-md-10 mx-auto">
+              @Html.GetGridHtml(Model, "mainContent", "Blue", true)
+          </div>
       </div>
     </div>
   </article>
