@@ -1,13 +1,55 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IPublishedContent>
 
-<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+
+@{ 
+
+    var title = Model.HasValue("title") ? Model.Value<string>("title") : Model.Name;
+    var subtitle =  Model.HasValue("subtitle") ? Model.Value<string>("subtitle") : "";
+    var image = Model.Value<IPublishedContent>("mainImage", fallback: Fallback.ToAncestors);
+    //string imageUrl = Model.Value<IPublishedContent>("mainImage") != null ? Model.Value<IPublishedContent>("mainImage").Url : "";
+
+
+
+
+    var imageUrl = "";
+    if (image != null)
+    {
+
+        imageUrl = image.GetCropUrl(930, 530);
+
+    }
+    var articleName = Model.HasProperty("articleName") && Model.HasValue("articleName") ? Model.Value<string>("articleName") : "";
+    DateTime articleDate = Model.HasProperty("articleDate") && Model.HasValue("articleDate") ? Model.Value<DateTime>("articleDate") : DateTime.MinValue;
+    bool isArticlePage = Model.HasProperty("articleName") && Model.HasProperty("articleDate");
+
+
+}
+
+
+<header class="masthead" style="@(!string.IsNullOrWhiteSpace(imageUrl) ? "background-image: url('" + imageUrl + "')" : null)">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h1>@Model.Name</h1>
-                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                    <h1>@title</h1>
+                    <span class="subheading">@subtitle</span>
+                    @if (isArticlePage)
+                    {
+                        if (!string.IsNullOrWhiteSpace(articleName) && articleDate != DateTime.MinValue)
+                        {
+                            <span class="meta">
+                                Posted by @articleName
+                                on @articleDate
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="meta">
+                                Posted on @articleDate
+                            </span>
+                        }
+                    }
                 </div>
             </div>
         </div>
