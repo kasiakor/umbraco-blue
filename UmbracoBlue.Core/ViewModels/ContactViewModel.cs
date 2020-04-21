@@ -14,10 +14,12 @@ namespace UmbracoBlue.Core.ViewModels
 
         [Required(ErrorMessage = "Enter your email address")]
         [EmailAddress(ErrorMessage = "Enter valid email address")]
-        public string EmailAdrress { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Enter your message")]
         [MaxLength(500, ErrorMessage = "Your message must be no longer than 500 characters")]
         public string Message { get; set; }
+
+        public int ContactFormId { get; set; }
     }
 }
