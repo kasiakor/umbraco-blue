@@ -1,8 +1,9 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using UmbracoBlue.Core.Controllers
 
 
     @{
-    Layout = "master.cshtml";
+        Layout = "master.cshtml";
     }
 <!-- Page Header -->
 @Html.Partial("~/Views/Partials/pageHeader.cshtml")
@@ -10,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            @*@Html.Partial("~/Views/Partials/Contact/contactForm.cshtml")*@
+           @{ Html.RenderAction("RenderForm", "ContactSurface");}
         </div>
     </div>
 </div>
