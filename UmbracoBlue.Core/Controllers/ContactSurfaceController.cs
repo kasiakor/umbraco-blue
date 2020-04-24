@@ -1,8 +1,8 @@
-﻿using ClientDependency.Core.Logging;
-using System;
+﻿using System;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using Umbraco.Core.Logging;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using UmbracoBlue.Core.ViewModels;
@@ -68,7 +68,8 @@ namespace UmbracoBlue.Core.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error("Error sending contact form", ex);
+                //_logger.Error("Error sending contact form", ex);
+                _logger.Error(typeof (ContactViewModel), ex, "Error sending contact form");
                 return false;
             }
         }

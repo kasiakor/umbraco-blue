@@ -1,6 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContactViewModel>
 @using UmbracoBlue.Core.ViewModels
 
+
 @using (Ajax.BeginForm("SubmitForm", "ContactSurface", new AjaxOptions()
 {
     UpdateTargetId = "form-result",
@@ -18,8 +19,8 @@
             <div class="form-group floating-label-form-group controls">
                 <label>Name</label>
                 @*<input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                <p class="help-block text-danger"></p>*@
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder="Name" })
+                    <p class="help-block text-danger"></p>*@
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Name" })
                 @Html.ValidationMessageFor(m => m.Name)
             </div>
         </div>
@@ -42,5 +43,6 @@
             <button type="submit" class="btn btn-primary contact-submit" id="sendMessageButton">Send</button>
         </div>
     </div>
-    <div class="form-results"></div>
+
 }
+<div id="form-result"></div>

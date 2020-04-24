@@ -69,4 +69,17 @@
       <file name="/css/mystyle.css" />
     </files>
   </item>
+  <item key="L1NjcmlwdHMvanF1ZXJ5LTMuMy4xLm1pbi5qczsvU2NyaXB0cy9ib290c3RyYXAubWluLmpzOy9TY3JpcHRzL2pxdWVyeS51bm9idHJ1c2l2ZS1hamF4Lm1pbi5qczsvU2NyaXB0cy9qcXVlcnkudmFsaWRhdGUubWluLmpzOy9TY3JpcHRzL2pxdWVyeS52YWxpZGF0ZS51bm9idHJ1c2l2ZS5taW4uanM7L1NjcmlwdHMvY29udGFjdEZvcm0uanM7L3ZlbmRvci9qcXVlcnkvanF1ZXJ5Lm1pbi5qczsvdmVuZG9yL2Jvb3RzdHJhcC9qcy9ib290c3RyYXAuYnVuZGxlLm1pbi5qczsvanMvY2xlYW4tYmxvZy5taW4uanM7" file="C:\Users\Kasia\source\repos\UmbracoBlue.Web\UmbracoBlue.Web\App_Data\TEMP\ClientDependency\1_3a5e2f32f687478889e7026f3bbf34fb.cdJ" compression="gzip" version="1">
+    <files>
+      <file name="/Scripts/jquery-3.3.1.min.js" />
+      <file name="/Scripts/bootstrap.min.js" />
+      <file name="/Scripts/jquery.unobtrusive-ajax.min.js" />
+      <file name="/Scripts/jquery.validate.min.js" />
+      <file name="/Scripts/jquery.validate.unobtrusive.min.js" />
+      <file name="/Scripts/contactForm.js" />
+      <file name="/vendor/jquery/jquery.min.js" />
+      <file name="/vendor/bootstrap/js/bootstrap.bundle.min.js" />
+      <file name="/js/clean-blog.min.js" />
+    </files>
+  </item>
 </map>
