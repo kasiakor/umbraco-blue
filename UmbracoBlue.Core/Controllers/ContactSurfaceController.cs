@@ -69,7 +69,7 @@ namespace UmbracoBlue.Core.Controllers
             catch (Exception ex)
             {
                 //_logger.Error("Error sending contact form", ex);
-                _logger.Error(typeof (ContactViewModel), ex, "Error sending contact form");
+                _logger.Error(typeof (ContactSurfaceController), ex, "Error sending contact form");
                 return false;
             }
         }

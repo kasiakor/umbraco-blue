@@ -13,7 +13,7 @@
         });
     },
     showResult: function () {
-        $(".outer-form").hide("slow");
+        $(".outer-form, p.hide-para").hide("slow");
         $(".form-results").show("slow");
     }
 }
