@@ -1,22 +1,23 @@
-﻿using System;
-using System.Net.Mail;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
-using Umbraco.Core.Logging;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
+using UmbracoBlue.Core.Services;
 using UmbracoBlue.Core.ViewModels;
+
 
 namespace UmbracoBlue.Core.Controllers
 {
     public class ContactSurfaceController : SurfaceController
     {
-        private readonly ILogger _logger;
+        //we use it instead of ILogger
+
+        private readonly ISmtpService _smtpService;
 
         //dependency injection is baked in in Umbraco 8
-        public ContactSurfaceController(ILogger logger)
+        public ContactSurfaceController(ISmtpService smtpService)
         {
-            _logger = logger;      
+            _smtpService = smtpService;
         }
 
         [HttpGet]
@@ -42,7 +43,8 @@ namespace UmbracoBlue.Core.Controllers
             if (ModelState.IsValid)
             {
             //we pass the model in from the SendMail method below
-                success = SendMail(model);
+            //now it will be using a service when passing the model to send email
+                success = _smtpService.SendEmail(model);
 
             }
 
@@ -50,28 +52,6 @@ namespace UmbracoBlue.Core.Controllers
             var successMessage = contactPage.Value<IHtmlString>("successMessage");
             var errorMessage = contactPage.Value<IHtmlString>("errorMessage");
             return PartialView("~/Views/Partials/Contact/result.cshtml", success ? successMessage : errorMessage);
-        }
-        public bool SendMail(ContactViewModel model)
-        {
-            try
-            {
-                MailMessage message = new MailMessage();
-                SmtpClient client = new SmtpClient();
-                string toAddress = "to@test.com";
-                string fromAddress = "from@test.com";
-                message.Subject = $"Enquiry form: {model.Name} - {model.Email}";
-                message.Body = model.Message;
-                message.To.Add(new MailAddress(toAddress, toAddress));
-                message.From = new MailAddress(fromAddress, fromAddress);
-                client.Send(message);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                //_logger.Error("Error sending contact form", ex);
-                _logger.Error(typeof (ContactSurfaceController), ex, "Error sending contact form");
-                return false;
-            }
         }
     }
 }
