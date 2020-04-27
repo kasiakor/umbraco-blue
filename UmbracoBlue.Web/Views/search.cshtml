@@ -1,13 +1,15 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Umbraco.Web.PublishedModels.Search>
+
     @{
-    Layout = "master.cshtml";
+        Layout = "master.cshtml";
+        var searchQuery = Request.QueryString["q"];
     }
 
     <!-- Page Header -->
     @Html.Partial("~/Views/Partials/pageHeader.cshtml")
 
     <div class="container">
-        <form action="/search/" method="GET" id="search">
+        <form action="@Model.Url" method="GET" id="search">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="form-group controls">
@@ -20,7 +22,13 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <p>There are no search results</p>
+                    @if(!string.IsNullOrWhiteSpace(searchQuery))
+                    {
+                        var results = Umbraco.ContentQuery.Search(searchQuery, string.Empty);
+                        long resultsCount = results != null && results.Any() ? results.Count() : 0;
+
+                    <p>There @(resultsCount == 1 ? "is" : "are" ) @resultsCount search result@(resultsCount == 1 ? null : "s")</p>
+                    }
                 </div>
             </div>
         </form>
