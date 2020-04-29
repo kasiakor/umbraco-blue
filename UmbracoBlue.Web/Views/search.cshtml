@@ -27,7 +27,7 @@
                     var results = Umbraco.ContentQuery.Search(searchQuery, string.Empty);
                     long resultsCount = results != null && results.Any() ? results.Count() : 0;
 
-                    <p>There @(resultsCount == 1 ? "is" : "are") @resultsCount search result@(resultsCount == 1 ? null : "s")</p>
+                <p>@Html.Raw(string.Format(Umbraco.GetDictionaryValue("Search.ResultsText"), resultsCount == 1 ? "is" : "are", resultsCount, resultsCount == 1 ? null : "s"))</p>
 
                     if (resultsCount > 0)
                     {
