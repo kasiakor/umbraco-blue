@@ -25,12 +25,32 @@
                 {
                     foreach (var item in navItems)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link" href="@item.Url">@item.Name</a>
-                        </li>
+                        var itemChildren = item.Children.Where(x => x.IsVisible());
+                        var hasChildren = itemChildren != null && itemChildren.Any();
+                        if (hasChildren)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@item.Name</a>
+                                <div class="dropdown-menu">
+
+                                    @foreach (var child in itemChildren)
+                                    {
+                                        <a class="dropdown-item" href="@child.Url">@child.Name</a>
+                                    }
+
+                                </div>
+                            </li>
+                        }
+
+                        else {
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="@item.Url">@item.Name</a>
+                            </li>
+                                    }
+                        }
                     }
-                }
-            </ul>
+                </ul>
         </div>
     </div>
 </nav>
